@@ -1,29 +1,26 @@
 package com.woo.main;
 
+import com.woo.main.departments.DepartmentController;
 import com.woo.main.departments.DepartmentDAO;
+import com.woo.main.employees.EmployeesController;
+import com.woo.main.locations.LocationController;
 import com.woo.main.locations.LocationDAO;
 
 public class JDBCMain {
 
 	public static void main(String[] args) {
 		System.out.println("Start");
+//		DepartmentController dc = new DepartmentController();
+//		LocationController lc = new LocationController();
+		EmployeesController ec = new EmployeesController();
 		
-//		DepartmentDAO dao = new DepartmentDAO();
-//		try {
-//			dao.getList();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
-		LocationDAO dao2 = new LocationDAO();
-		try {
-			dao2.getList();
+		try {	
+//			dc.start();
+//			lc.start();
+			ec.start();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		System.out.println("Finish");
 		
 

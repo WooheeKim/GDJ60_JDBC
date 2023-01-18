@@ -1,6 +1,7 @@
 package com.woo.main;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -10,6 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.woo.main.departments.DepartmentDAO;
+import com.woo.main.departments.DepartmentDTO;
+import com.woo.main.locations.LocationDAO;
+import com.woo.main.locations.LocationDTO;
 
 /**
  * Handles requests for the application home page.
@@ -35,5 +42,24 @@ public class HomeController {
 		
 		return "home";
 	}
+	
+	@RequestMapping("departments")
+	public void getDepartments(Model model) throws Exception {
+		
+		DepartmentDAO departmentDAO = new DepartmentDAO();
+		ArrayList<DepartmentDTO> ar = departmentDAO.getList();
+		
+		model.addAttribute("list", ar);
+		
+	}
+	
+	@RequestMapping("locations")
+	@ResponseBody
+	public ArrayList<LocationDTO> getLocations() throws Exception {
+		LocationDAO locationDAO = new LocationDAO();
+		ArrayList<LocationDTO> ar = locationDAO.getList();
+		return ar;
+	}
+	
 	
 }
