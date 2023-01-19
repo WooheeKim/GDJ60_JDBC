@@ -24,7 +24,10 @@ public class EmployeesController {
 			System.out.println("1. 사원정보리스트");
 			System.out.println("2. 개별사원정보");
 			System.out.println("3. 사원정보검색");
-			System.out.println("4. 종	료");
+			System.out.println("4. 사원정보추가");
+			System.out.println("5. 사원정보삭제");
+			System.out.println("6. 사원정보수정");
+			System.out.println("7. 종	료");
 			int select = sc.nextInt();
 			
 			switch(select) {
@@ -43,6 +46,12 @@ public class EmployeesController {
 				String add = sc.next();
 				ar = employeesDAO.getFind(add);
 				employeesView.view(ar);
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			case 6:
 				break;
 			default:
 				check = false;
