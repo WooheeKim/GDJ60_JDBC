@@ -4,30 +4,41 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.woo.main.locations.LocationDTO;
 import com.woo.main.util.DBConnection;
 
 public class EmployeesDAO {
 	
-	// 월급의 평균
-	public void getAvg() throws Exception {
-		Connection connection = DBConnection.getConnection();
-		
-		String sql = "SELECT AVG(SALARY), SUM(SALARY) FROM EMPLOYEES";
-		
-		PreparedStatement st = connection.prepareStatement(sql);
-		
-		ResultSet rs = st.executeQuery();
-		
-		rs.next();
-		
-		System.out.println(rs.getDouble(1));
-		System.out.println(rs.getDouble(2));
-		
-		DBConnection.disConnect(rs, st, connection);
-		
-	}
+//	// 월급의 평균
+//	public HashMap<String, Double> getAvg() throws Exception {
+//		
+//		HashMap<String, Double> map = new HashMap<String, Double>();
+//		
+//		Connection connection = DBConnection.getConnection();
+//		
+//		String sql = "SELECT AVG(SALARY), SUM(SALARY) FROM EMPLOYEES";
+//		
+//		PreparedStatement st = connection.prepareStatement(sql);
+//		
+//		ResultSet rs = st.executeQuery();
+//		
+//		rs.next();
+//		
+//		// 1. List, Array
+//		// 2. DTO(Class)
+//		// 3. Map(Key, Value)
+//		
+//		map.put("avg", rs.getDouble("A"));
+//		map.put("sum", rs.getDouble(2));
+//		System.out.println(rs.getDouble(1));
+//		System.out.println(rs.getDouble(2));
+//		
+//		DBConnection.disConnect(rs, st, connection);
+//		
+//		return map;
+//	}
 	
 	// method 1 : query 1
 	// list
@@ -85,7 +96,7 @@ public class EmployeesDAO {
 			employeesDTO.setLast_name(rs.getString("LAST_NAME"));
 			employeesDTO.setEmail(rs.getString("EMAIL"));
 			employeesDTO.setPhone_number(rs.getString("PHONE_NUMBER"));
-			employeesDTO.setHire_date(rs.getDate("HIRE_DATE"));
+			employeesDTO.setHire_date(rs.getString("HIRE_DATE"));
 			employeesDTO.setJob_id(rs.getString("JOB_ID"));
 			employeesDTO.setSalary(rs.getDouble("SALARY"));
 			employeesDTO.setCommission_pct(rs.getDouble("COMMISSION_PCT"));
@@ -99,14 +110,22 @@ public class EmployeesDAO {
 		return ar;
 	}
 	
-	// INSERT
-//	public int setDate(LocationDTO locationDTO) throws Exception {
-//		
-//		Connection connection = DBConnection.getConnection();
-//		
-//		String sql = "INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)"
-//				+ " VALUES (EMPLOYEES_SEQ.NEXTVAL, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?)";
-//	}
+//	 INSERT 하다가 말음
+	public int setDate(LocationDTO locationDTO) throws Exception {
+		
+		Connection connection = DBConnection.getConnection();
+		
+		String sql = "INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)"
+				+ " VALUES (EMPLOYEES_SEQ.NEXTVAL, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?)";
+		
+		PreparedStatement st = connection.prepareStatement(sql);
+		
+		int result = st.executeUpdate();
+		
+		DBConnection.disConnect(st, connection);
+		
+		return result;
+	}
 	
 	
 }
