@@ -2,6 +2,9 @@ package com.woo.main.employees;
 
 import java.sql.Date;
 
+import com.woo.main.departments.DepartmentDTO;
+
+
 public class EmployeesDTO {
 
 	private Integer employee_id;
@@ -15,6 +18,7 @@ public class EmployeesDTO {
 	private Double commission_pct;
 	private Integer manager_id;
 	private Integer department_id;
+	
 	
 	public Integer getEmployee_id() {
 		return employee_id;

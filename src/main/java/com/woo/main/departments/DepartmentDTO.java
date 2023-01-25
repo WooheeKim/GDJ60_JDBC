@@ -1,5 +1,9 @@
 package com.woo.main.departments;
 
+import java.util.ArrayList;
+
+import com.woo.main.employees.EmployeesDTO;
+
 public class DepartmentDTO {
 	
 	// 모든 멤버변수의 접근지정자는 private
@@ -14,6 +18,14 @@ public class DepartmentDTO {
 	private Integer manager_id;
 	private Integer location_id;
 	
+	private ArrayList<EmployeesDTO> employeeDTOs;
+	
+	public ArrayList<EmployeesDTO> getEmployeeDTOs() {
+		return employeeDTOs;
+	}
+	public void setEmployeeDTOs(ArrayList<EmployeesDTO> employeeDTOs) {
+		this.employeeDTOs = employeeDTOs;
+	}
 	public Integer getDepartment_id() {
 		return department_id;
 	}
